@@ -1,0 +1,70 @@
+
+
+
+2> WRITE A QUARY TO DISPLAY ALL THE DETAILS OF EMPLOYEE AND SORT DATA IS ASCENDING ORDER.(SAL)
+>> SELECT * FROM EMP ORDER BY SAL ASC;
+-----------------------------------------------------------------------------------------------------
+
+3> WRITE A QUARY TO DISLPAY EMPLOYEE NAME AND SALARY WHERE EMPLOYEE EARNING SAME SALARY.
+
+>> SELECT ENAME,SAL FROM EMP WHERE SAL IN (SELECT SAL FROM EMP GROUP BY SAL HAVING COUNT(*)>1);
+--------------------------------------------------------------------------------------------------------
+
+4>WRITE A QUARY TO DISPLAY MANAGER NAME , MANAGER SALARY WHERE ATLEST 4 EMPLOYEE ARE REPORTING TO MANAGER.
+
+>>SELECT ENAME,SAL FROM EMP WHERE EMPNO IN (SELECT MGR FROM EMP) AND EMPNO IN (SELECT MGR FROM EMP GROUP BY MGR HAVING COUNT(*)>4);
+-------------------------------------------------------------------------------------------------------------
+
+5>WRITE A QUERY TO DISPLAY MANAGER NAME WHERE MANAGER WORKING IN  LOCATION DALLAS, NEW YORK AND SORT THE DATA IN DESCENDING ORDER (MANAGER NAME).
+
+>>SELECT ENAME FROM EMP WHERE DEPTNO IN ( SELECT DEPTNO FROM DEPT WHERE LOC IN('DALLAS','NEW YORK')) ORDER BY ENAME DESC;
+--------------------------------------------------------------------------------------------------------------
+
+6> WRITE A QUARY TO DISPLAY LOCATION FOR SMITH AND TURNER .
+
+>> SELECT LOC FROM DEPT WHERE DEPTNO IN ( SELECT DEPTNO FROM EMP WHERE ENAME IN ('SMITH','TURNER'));
+--------------------------------------------------------------------------------------------------------------
+
+7> WRITE A QUARY TO DISLPAY EMPLOYEE DETAILS WHERE EMPLOYEE DEPARTMENT RESEARCH AND SCIENTIST.
+
+>>SELECT * FROM EMP WHERE DEPTNO IN (SELECT DEPTNO FROM DEPT WHERE DNAME IN ('RESEARCH','SCIENTIST'));
+----------------------------------------------------------------------------------------------------------
+
+8> WRIETE A QUARY TO DISPLAY MANAGER NAME MANAGER DISIGNATION WHERE DESIGNATION THIRD LATTER IS CONSONENT.
+
+>>SELECT ENAME , JOB FROM EMP WHERE SUBSTR(JOB,3,1) NOT IN('A','E','I','O','U');
+---------------------------------------------------------------------------------------------------------------------
+
+9> WRITE A QUARY TO DISPLAY EMPLOYEE NAME WHERE EMPLOYEE ARE REPORTING TO KING AND BLAKE.
+
+>>SELECT ENAME FROM EMP WHERE MGR IN (SELECT EMPNO FROM EMP WHERE ENAME IN ('KING','BLAKE'));
+---------------------------------------------------------------------------------------------------------------------
+
+10> WRITE A QUARY TO DISPLAY DUPLICATE ENAME.
+
+>>SELECT ENAME FROM EMP  GROUP BY ENAME HAVING COUNT(*)>1;
+---------------------------------------------------------------------------------------------------------------------
+
+11> WRITE A QUARY TO DISPLAY UNIQUE SALARY .
+
+>>SELECT SAL FROM EMP GROUP BY SAL HAVING COUNT (*)=1;
+---------------------------------------------------------------------------------------------------------------------
+
+12> WRITE QUARY TO DELETE FIRST LETTER FROM MANAGER NAME .
+
+>>SELECT TRIM(LEADING SUBSTR(ENAME,1,1) FROM ENAME) FROM EMP WHERE EMPNO IN (SELECT MGR FROM EMP WHERE MGR IS NOT NULL);
+---------------------------------------------------------------------------------------------------------------------
+
+13> WRITE A QUARY TO DISPLAY NUMBER OF CONSONENTS PRESENT IN ENAME.
+
+>>SELECT LENGTH(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(ENAME,'A'),'E'),'I'),'O'),'U')) FROM EMP;
+---------------------------------------------------------------------------------------------------------------------
+
+14> WRITE A QUARY TO DISPLAY NUMBER OF VOWEL PRESENT IN ENAME.
+
+>>SELECT LENGTH(ENAME) - LENGTH(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(ENAME,'A'),'E'),'I'),'O'),'U')) FROM EMP;
+---------------------------------------------------------------------------------------------------------------------
+
+15> WRITE A QUARY TO DISPLAY NUMBER OF A PRESENT IN NINANA .
+
+>>SELECT LENGTH('NINANA') - LENGTH(REPLACE('NINANA','A')) FROM DUAL;
